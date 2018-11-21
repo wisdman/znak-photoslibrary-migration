@@ -57,6 +57,10 @@ func (a *Album) AddImage(filepath string, description string) error {
 		return err
 	}
 
+	if token[0:1] == "{" {
+		return errors.New("Uploading error")
+	}
+
 	log.Printf("Adding media item to album")
 
 	jsonString := fmt.Sprintf(`{

@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
+	"os"
 
 	"github.com/wisdman/znak-photoslibrary-migration/lib/oauth"
 	"github.com/wisdman/znak-photoslibrary-migration/lib/old"
@@ -10,6 +12,12 @@ import (
 )
 
 func main() {
+
+	logFile, err := os.OpenFile("error.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer logFile.Close()
 
 	ctx := context.Background()
 	client, err := oauth.New(ctx, []string{photos.OAuthScope})
@@ -48,7 +56,12 @@ func main() {
 			log.Printf("Image %d (%d of %d)", oldImage.OID(), i+1, len(oldAlbum.Images))
 			err = newAlbum.AddImage(oldImage.Filepath(), oldImage.Description)
 			if err != nil {
-				log.Fatal(err)
+				logStr := fmt.Sprintf("[%s] %s: %d\n", oldAlbum.ID(), oldAlbum.Title(), oldImage.OID())
+				if _, err := logFile.Write([]byte(logStr)); err != nil {
+					log.Fatal(err)
+				}
+
+				log.Printf("IMAGE ERROR: %s", logStr)
 			}
 		}
 
