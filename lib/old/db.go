@@ -16,7 +16,7 @@ func init() {
 
 	DB, err = pgx.NewConnPool(pgx.ConnPoolConfig{
 		ConnConfig:     config,
-		MaxConnections: 10,
+		MaxConnections: 30,
 	})
 	if err != nil {
 		log.Fatal(err)

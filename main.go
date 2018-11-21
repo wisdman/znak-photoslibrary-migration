@@ -76,7 +76,13 @@ func main() {
 		}
 
 		old.Progress()
-		log.Printf("=== POOL ===\n%v", old.DB.Stat())
+
+		stat := old.DB.Stat()
+		log.Printf("=== POOL ===\n%v", stat)
+
+		if stat.AvailableConnections < 5 {
+			old.DB.Reset()
+		}
 	}
 
 	log.Printf("=== Complite ===")
