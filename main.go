@@ -76,6 +76,7 @@ func main() {
 		}
 
 		old.Progress()
+		log.Printf("=== POOL ===\n%v", old.DB.Stat())
 	}
 
 	log.Printf("=== Complite ===")
