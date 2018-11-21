@@ -110,7 +110,7 @@ func (a *Album) AddImage(filepath string, description string) error {
 	}
 
 	if len(response.Items) == 0 || response.Items[0].Status == nil || response.Items[0].Status.Message != "OK" {
-		return errors.New(fmt.Sprintf("Bad response: %s", string(jsonBlob)))
+		return errors.New(fmt.Sprintf("=== ERROR ===\nRequest: %s\nResponse: %s", jsonString, string(jsonBlob)))
 	}
 
 	return nil
