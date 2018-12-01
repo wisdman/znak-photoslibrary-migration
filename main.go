@@ -56,7 +56,7 @@ func main() {
 			log.Printf("Image %d (%d of %d)", oldImage.OID(), i+1, len(oldAlbum.Images))
 			err = newAlbum.AddImage(oldImage.Filepath(), oldImage.Description)
 			if err != nil {
-				logStr := fmt.Sprintf("[%s] %s: %d\n", oldAlbum.ID(), oldAlbum.Title(), oldImage.OID())
+				logStr := fmt.Sprintf("[%d] %s: %d\n", oldAlbum.ID(), oldAlbum.Title(), oldImage.OID())
 				if _, err := logFile.Write([]byte(logStr)); err != nil {
 					log.Fatal(err)
 				}
