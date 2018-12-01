@@ -78,7 +78,8 @@ func main() {
 
       buf, err := json.Marshal(jAlbum)
       if err != nil {
-        log.Fatal(err)
+        log.Printf("\nALBUM MARSHAL ERROR: %v\n", err)
+        continue
       }
 
       if _, err := albumsFile.Write(append(buf, ",\n"...)); err != nil {
