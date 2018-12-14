@@ -5,6 +5,7 @@ import (
   "os"
   "log"
   "fmt"
+  "time"
 
   "github.com/wisdman/znak-photoslibrary-migration/lib/oauth"
   photoslibrary "google.golang.org/api/photoslibrary/v1"
@@ -72,6 +73,8 @@ func main() {
         log.Printf("\nALBUM AddEnrichment REQUEST ERROR: %v\n", err)
         continue
       }
+
+      time.Sleep(time.Second)
     }
 
     nextPageToken = albums.NextPageToken
