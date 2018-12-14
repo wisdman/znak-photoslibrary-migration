@@ -67,7 +67,7 @@ func main() {
         },
       }
 
-      _, err := photos.Albums.AddEnrichment(album.Id, request).Do()
+      _, err = photos.Albums.AddEnrichment(album.Id, request).Do()
       if err != nil {
         log.Printf("\nALBUM AddEnrichment REQUEST ERROR: %v\n", err)
         continue
