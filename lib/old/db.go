@@ -2,7 +2,6 @@ package old
 
 import (
 	"log"
-
 	"github.com/jackc/pgx"
 )
 
